@@ -7,7 +7,6 @@ public class Info {
     private int price;
 
     public Info() {
-
     }
 
     public int getId() {

@@ -4,10 +4,7 @@ import com.kovbel.agency.agency.dao.entity.Info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Component
@@ -25,7 +22,7 @@ public class DAO {
         return jdbcTemplate.update(sql, info.getTour(), info.getCountry(), info.getPrice(), info.getId());
     }
     public int delete(int id){
-        String sql="DELETE FROM infoukraine WHERE id="+id+"";
+        String sql="DELETE FROM infoukraine WHERE id=" + id + " ";
         return jdbcTemplate.update(sql);
     }
     public Info getEmpById(int id){
@@ -33,15 +30,13 @@ public class DAO {
         return jdbcTemplate.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Info>(Info.class));
     }
     public List<Info> getMyList(){
-        return jdbcTemplate.query("SELECT * FROM infoukraine",new RowMapper<Info>(){
-            public Info mapRow(ResultSet rs, int row) throws SQLException {
-                Info info = new Info();
-                info.setId(rs.getInt(1));
-                info.setCountry(rs.getString(2));
-                info.setTour(rs.getString(3));
-                info.setPrice(rs.getInt(4));
-                return info;
-            }
+        return jdbcTemplate.query("SELECT * FROM infoukraine", (rs, row) -> {
+            Info info = new Info();
+            info.setId(rs.getInt(1));
+            info.setCountry(rs.getString(2));
+            info.setTour(rs.getString(3));
+            info.setPrice(rs.getInt(4));
+            return info;
         });
     }
 }

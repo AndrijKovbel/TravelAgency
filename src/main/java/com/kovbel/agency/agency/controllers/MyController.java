@@ -25,7 +25,7 @@ public class MyController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("info") Info info) {
+    public String save(@ModelAttribute Info info) {
         dao.save(info);
         return "redirect:/view";
     }
@@ -43,7 +43,6 @@ public class MyController {
         model.addAttribute("info", info);
         return "editform";
     }
-
 
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public String editsave(@ModelAttribute("info") Info info) {
