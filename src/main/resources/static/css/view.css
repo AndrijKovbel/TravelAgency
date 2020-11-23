@@ -1,8 +1,16 @@
+div {
+    font-size: larger;
+}
 
 
-table, h1 , div , a{
+table, h1 {
     text-align: center;
 }
-table{
+
+table {
     margin: auto;
+}
+
+.list_user{
+    margin: 30px;
 }

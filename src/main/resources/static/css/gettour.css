@@ -1,11 +1,10 @@
-h1 {
+
+table, h1, div, a {
     text-align: center;
-    margin: revert;
 }
 
-form {
+table {
     margin: auto;
-    text-align: -webkit-center;
 }
 
 .list_user{
