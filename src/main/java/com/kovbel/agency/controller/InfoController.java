@@ -16,26 +16,14 @@ public class InfoController {
 
 
     @RequestMapping("/login")
-    public String login (Model model) {
+    public String login(Model model) {
         return "login";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public String logout (Model model) {
+    public String logout(Model model) {
         return "logout";
     }
-
-//    @RequestMapping("/form")
-//    public String showform(Model model) {
-//        model.addAttribute("command", new Info());
-//        return "form";
-//    }
-
-//    @RequestMapping(value = "/save", method = RequestMethod.POST)
-//    public String save(@ModelAttribute Info info) {
-//        infoService.save(info);
-//        return "redirect:/view";
-//    }
 
     @RequestMapping("/view")
     public String view(Model model) {
@@ -57,11 +45,6 @@ public class InfoController {
         return "redirect:/view";
     }
 
-//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-//    public String delete(@PathVariable Long id) {
-//        infoService.deleteById(id);
-//        return "redirect:/view";
-//    }
 
     @RequestMapping(value = "/get-country/{country}")
     public String getNameTour(@PathVariable String country, Model model) {
@@ -69,4 +52,27 @@ public class InfoController {
         model.addAttribute("list", list);
         return "allcountry";
     }
+
 }
+
+
+//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+//    public String delete(@PathVariable Long id) {
+//        infoService.deleteById(id);
+//        return "redirect:/view";
+//    }
+
+
+//    @RequestMapping("/form")
+//    public String showform(Model model) {
+//        model.addAttribute("command", new Info());
+//        return "form";
+//    }
+
+//    @RequestMapping(value = "/save", method = RequestMethod.POST)
+//    public String save(@ModelAttribute Info info) {
+//        infoService.save(info);
+//        return "redirect:/view";
+//    }
+
+

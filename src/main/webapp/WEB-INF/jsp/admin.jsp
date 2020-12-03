@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +49,6 @@
 <br>
     <table border = "1" cellpadding = "5" cellspacing = "5">
             <thead>
-            <th>ID</th>
             <th>UserName</th>
             <th>Password</th>
             <th>Roles</th>
@@ -55,7 +56,6 @@
             </thead>
             <c:forEach items="${allUsers}" var="user">
                 <tr>
-                    <td>${user.id}</td>
                     <td>${user.username}</td>
                     <td>${user.password}</td>
                     <td>
@@ -63,8 +63,12 @@
                     </td>
                     <td>
                         <form action="${pageContext.request.contextPath}/admin" method="post">
+
                             <input type="hidden" name="userId" value="${user.id}"/>
                             <input type="hidden" name="action" value="delete"/>
+
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
                             <button type="submit">Delete</button>
                         </form>
                     </td>

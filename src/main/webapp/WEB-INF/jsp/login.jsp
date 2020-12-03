@@ -3,6 +3,7 @@
 <%@ taglib prefix="b" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <html>
@@ -17,6 +18,7 @@
      alt="Logo">
 <body>
 <h1>Hello my friend nice to see you please Login to see Information about tours.</h1>
+
 <form name='f' action="login" method='POST'>
     <div class="form-group">
         <label for="exampleInputEmail1">User Name</label>
@@ -31,6 +33,9 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
+
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
     <button input name="submit" type="submit" value="submit" class="btn btn-primary">Submit</button>
     <div>
         <button>
