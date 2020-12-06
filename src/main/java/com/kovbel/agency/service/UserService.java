@@ -21,16 +21,12 @@ import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
-
     @PersistenceContext
-    private EntityManager entityManager;
-
+    private EntityManager em;
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     RoleRepository roleRepository;
-
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -77,7 +73,7 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> usergtList(Long idMin) {
-        return entityManager.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
+        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
                 .setParameter("paramId", idMin).getResultList();
     }
 }

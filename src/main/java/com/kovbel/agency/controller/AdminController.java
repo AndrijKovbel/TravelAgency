@@ -24,12 +24,6 @@ public class AdminController {
         return "form";
     }
 
-    @RequestMapping("/admin")
-    public String showAllUsers(Model model){
-        model.addAttribute("allUsers",userService.allUsers());
-        return "admin";
-    }
-
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute Info info) {
         infoService.save(info);
@@ -40,6 +34,12 @@ public class AdminController {
     public String delete(@PathVariable Long id) {
         infoService.deleteById(id);
         return "redirect:/view";
+    }
+
+    @RequestMapping("/admin")
+    public String showAllUsers(Model model){
+        model.addAttribute("allUsers",userService.allUsers());
+        return "admin";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.POST)

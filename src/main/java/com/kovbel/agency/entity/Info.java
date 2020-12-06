@@ -1,8 +1,9 @@
 package com.kovbel.agency.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Info {
@@ -12,6 +13,10 @@ public class Info {
     private String tour;
     private String country;
     private int price;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
 
 
     public Info() {

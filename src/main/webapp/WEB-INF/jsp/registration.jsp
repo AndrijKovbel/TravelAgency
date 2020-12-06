@@ -1,7 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -30,9 +29,6 @@
                     <form:errors path="password"></form:errors>
                         ${passwordError}
                 </div>
-
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
                 <button type="submit">Registration</button>
                 <br>
                 <a href="/login">Main Page!</a>

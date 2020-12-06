@@ -42,7 +42,6 @@
         <div>
             <a href="/logout">Logout</a>
         </div>
-    </div>
 </nav>
 <div>
     <h1>Add New Tour</h1>
@@ -68,9 +67,6 @@
             </tr>
             <tr>
                 <td></td>
-
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
                 <td><input type="submit" value="save"/></td>
             </tr>
         </table>

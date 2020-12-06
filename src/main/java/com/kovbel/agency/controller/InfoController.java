@@ -25,6 +25,7 @@ public class InfoController {
         return "logout";
     }
 
+
     @RequestMapping("/view")
     public String view(Model model) {
         List<Info> list = infoService.findAll();
@@ -45,22 +46,13 @@ public class InfoController {
         return "redirect:/view";
     }
 
-
     @RequestMapping(value = "/get-country/{country}")
     public String getNameTour(@PathVariable String country, Model model) {
         List<Info> list = infoService.findAllByCountry(country);
         model.addAttribute("list", list);
         return "allcountry";
     }
-
 }
-
-
-//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-//    public String delete(@PathVariable Long id) {
-//        infoService.deleteById(id);
-//        return "redirect:/view";
-//    }
 
 
 //    @RequestMapping("/form")
@@ -75,4 +67,8 @@ public class InfoController {
 //        return "redirect:/view";
 //    }
 
-
+//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+//    public String delete(@PathVariable Long id) {
+//        infoService.deleteById(id);
+//        return "redirect:/view";
+//    }

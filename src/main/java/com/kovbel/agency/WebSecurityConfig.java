@@ -1,4 +1,4 @@
-package com.kovbel.agency;
+ package com.kovbel.agency;
 
 import com.kovbel.agency.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -16,8 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserService userService;
-
-    //    @Override
+//    @Override
 //    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 //
 //        auth.inMemoryAuthentication()
@@ -29,18 +29,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        // @formatter:on
 //    }
 
-
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
 
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/", "/view", "/get-country").hasAnyRole("USER", "ADMIN", "SUPER_ADMIN")
-                .antMatchers("/edit", "editsave").hasAnyRole("ADMIN", "SUPER_ADMIN")
-                .antMatchers("/edit", "editsave", "/form", "/admin").hasRole("ADMIN")
-                .antMatchers("/login*", "/css/loginforma.css", "/registration*", "/css/registration.css").permitAll()
+                .antMatchers("/","/view","/get-country").hasAnyRole("USER","ADMIN","SUPER_ADMIN")
+                .antMatchers("/edit","editsave").hasAnyRole("ADMIN","SUPER_ADMIN")
+                .antMatchers("/edit","editsave","/form","/admin").hasRole("ADMIN")
+                .antMatchers("/login*","/css/loginforma.css","/registration*","/css/registration.css").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -55,13 +55,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configureGlobal (AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
 }
