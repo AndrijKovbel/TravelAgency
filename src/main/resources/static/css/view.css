@@ -2,6 +2,9 @@ div {
     font-size: larger;
 }
 
+.list_user{
+    margin: 30px;
+}
 
 table, h1 {
     text-align: center;
@@ -11,6 +14,3 @@ table {
     margin: auto;
 }
 
-.list_user{
-    margin: 30px;
-}

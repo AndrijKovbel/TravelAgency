@@ -1,0 +1,36 @@
+h5,p{
+    width: 30%;
+    background-color: black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    margin: 35px;
+    width: 93%;
+    font-style: italic;
+    font-size: larger;
+}
+
+img{
+    align-content: center;
+    align-items: center;
+    margin: 37px;
+    width: 32%;
+    height: 10%;
+    margin-left: 33%;
+    margin-bottom: auto;
+}
+
+.link{
+    text-align: center;
+    margin: 35px;
+    width: 93%;
+    font-style: italic;
+    font-size: larger;
+}
+
+
+
+

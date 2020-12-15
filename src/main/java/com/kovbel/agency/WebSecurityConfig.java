@@ -1,6 +1,9 @@
- package com.kovbel.agency;
+package com.kovbel.agency;
 
+import com.kovbel.agency.controller.AdminController;
 import com.kovbel.agency.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -17,7 +19,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserService userService;
-//    @Override
+
+    Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
+
+
+    //    @Override
 //    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 //
 //        auth.inMemoryAuthentication()
@@ -29,18 +35,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        // @formatter:on
 //    }
 
+
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
 
         http
-                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/","/view","/get-country").hasAnyRole("USER","ADMIN","SUPER_ADMIN")
-                .antMatchers("/edit","editsave").hasAnyRole("ADMIN","SUPER_ADMIN")
-                .antMatchers("/edit","editsave","/form","/admin").hasRole("ADMIN")
-                .antMatchers("/login*","/css/loginforma.css","/registration*","/css/registration.css").permitAll()
+                .antMatchers("/", "/view", "/get-country").hasAnyRole("USER", "ADMIN", "SUPER_ADMIN")
+                .antMatchers("/edit", "editsave").hasAnyRole("ADMIN", "SUPER_ADMIN")
+                .antMatchers("/edit", "editsave", "/form", "/admin").hasRole("ADMIN")
+                .antMatchers("/login*", "/css/loginforma.css", "/registration*", "/css/registration.css").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -48,11 +54,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/", true)
                 .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login");
-
-
+                .logout().permitAll()
+                .logoutUrl("/logout").permitAll()
+                .logoutSuccessUrl("/login")
+                .and()
+                .exceptionHandling().accessDeniedPage("/403");
+        logger.info("THE PROGRAM HAS STARTED IT`S WORK");
     }
 
 
@@ -62,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    protected void configureGlobal (AuthenticationManagerBuilder auth) throws Exception{
+    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

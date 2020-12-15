@@ -3,6 +3,7 @@
 <%@ taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,32 +17,35 @@
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Travel Agency</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/form">Add new Tour <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/view">View All Tours</a>
-            </li>
-        </ul>
-    </div>
-    <sec:authorize access="hasAnyRole('ADMIN')">
-        <div class="list_user">
-            <a href="/admin">List of registered User</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Travel Agency</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/form">Add new Tour <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/view">View All Tours</a>
+                </li>
+            </ul>
         </div>
-    </sec:authorize>
-    <div>
-        <div>
-            <a href="/logout">Logout</a>
-        </div>
-</nav>
+        <sec:authorize access="hasAnyRole('ADMIN')">
+            <div class="list_user">
+                <a href="/admin">List of registered User</a>
+            </div>
+        </sec:authorize>
+
+
+        <form:form action="/logout" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="submit" value="Sign Out">
+        </form:form>
+    </nav>
+</body>
 <h1>Edit My Tour List</h1>
 <form method="POST" action="/editsave" modelAttribute="info">
     <table>
@@ -64,6 +68,9 @@
         </tr>
         <tr>
             <td></td>
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
             <td><input type="submit" value="save"/></td>
         </tr>
     </table>

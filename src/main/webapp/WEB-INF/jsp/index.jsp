@@ -1,6 +1,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +39,12 @@
             <a href="/admin">List of registered User</a>
         </div>
     </sec:authorize>
-    <div>
-        <a href="/logout">Logout</a>
-    </div>
+
+    <form:form action="/logout" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="Sign Out">
+    </form:form>
+
 </nav>
 </body>
 <div class="mycarousel">

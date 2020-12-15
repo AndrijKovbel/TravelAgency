@@ -1,7 +1,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
@@ -41,11 +40,12 @@
             <a href="/admin">List of registered User</a>
         </div>
     </sec:authorize>
-    <div>
-        <div>
-            <a href="/logout">Logout</a>
-        </div>
-    </div>
+
+    <form:form action="/logout" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="Sign Out">
+    </form:form>
+
 </nav>
 <h1>Tour List</h1>
 <table border="13" width="60%" cellpadding="10">

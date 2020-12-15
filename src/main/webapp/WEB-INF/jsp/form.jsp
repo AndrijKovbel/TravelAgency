@@ -38,10 +38,12 @@
             <a href="/admin">List of registered User</a>
         </div>
     </sec:authorize>
-    <div>
-        <div>
-            <a href="/logout">Logout</a>
-        </div>
+
+    <form:form action="/logout" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="Sign Out">
+    </form:form>
+
 </nav>
 <div>
     <h1>Add New Tour</h1>
@@ -67,6 +69,9 @@
             </tr>
             <tr>
                 <td></td>
+
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
                 <td><input type="submit" value="save"/></td>
             </tr>
         </table>

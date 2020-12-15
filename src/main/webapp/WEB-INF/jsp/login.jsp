@@ -3,12 +3,14 @@
 <%@ taglib prefix="b" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/loginforma.css">
+    <link rel="icon" href= ../resources/static/favicon.png">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Login</title>
@@ -16,7 +18,8 @@
 <img src="https://images.creativemarket.com/0.1.0/ps/7901653/580/387/m2/fpnw/wm0/creativee-05-.jpg?1583899424&s=d71db22c9c5e2e23e2e705269887971f"
      alt="Logo">
 <body>
-<h1>Hello my friend nice to see you please Login to see Information about tours.</h1>
+<h1>Hey before you will start Login please</h1>
+
 <form name='f' action="login" method='POST'>
     <div class="form-group">
         <label for="exampleInputEmail1">User Name</label>
@@ -31,6 +34,9 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
+
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
     <button input name="submit" type="submit" value="submit" class="btn btn-primary">Submit</button>
     <div>
         <button>
