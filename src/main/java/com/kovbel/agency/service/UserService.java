@@ -2,7 +2,6 @@ package com.kovbel.agency.service;
 
 
 import com.kovbel.agency.controller.InfoController;
-import com.kovbel.agency.controller.RegistrationController;
 import com.kovbel.agency.entity.Role;
 import com.kovbel.agency.entity.User;
 import com.kovbel.agency.repository.RoleRepository;
@@ -29,14 +28,20 @@ public class UserService implements UserDetailsService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
+
     UserRepository userRepository;
 
-    @Autowired
     RoleRepository roleRepository;
 
-    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder, EntityManager entityManager) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.entityManager = entityManager;
+    }
 
     Logger logger = LoggerFactory.getLogger(InfoController.class);
 

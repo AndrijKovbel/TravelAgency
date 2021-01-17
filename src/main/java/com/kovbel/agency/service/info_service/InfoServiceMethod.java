@@ -12,6 +12,10 @@ import java.util.List;
 @Service
 public class InfoServiceMethod implements InfoService {
 
+    public InfoServiceMethod(InfoRepository infoRepository) {
+        this.infoRepository = infoRepository;
+    }
+
     @Autowired
     InfoRepository infoRepository;
 

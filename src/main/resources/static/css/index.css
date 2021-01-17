@@ -5,6 +5,10 @@ h5,p{
     text-align: center;
 
 }
+.welcome{
+    width: 15%;
+    text-align: center;
+}
 
 .mycarousel,.carousel-control-prev,.carousel-control-next{
     margin: 1% 20%;
